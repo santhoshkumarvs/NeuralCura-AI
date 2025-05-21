@@ -1,7 +1,14 @@
 output "cluster_name" {
-  value = module.eks.cluster_name
+  description = "EKS Cluster name"
+  value       = module.eks.cluster_name
 }
 
-output "kubeconfig" {
-  value = module.eks.kubeconfig
+output "cluster_endpoint" {
+  description = "EKS Cluster endpoint"
+  value       = module.eks.cluster_endpoint
+}
+
+output "cluster_security_group_id" {
+  description = "Security group ID"
+  value       = module.eks.cluster_security_group_id
 }
