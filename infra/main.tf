@@ -1,4 +1,4 @@
-﻿provider "aws" {
+provider "aws" {
   region = "us-east-1"
 }
 
@@ -8,6 +8,7 @@ module "eks" {
   cluster_version = "1.27"
   subnets         = ["subnet-xxxx", "subnet-yyyy"]
   vpc_id          = "vpc-xxxx"
+
   node_groups = {
     default = {
       desired_capacity = 2
