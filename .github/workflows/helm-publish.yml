@@ -1,0 +1,36 @@
+name: Publish Helm Chart
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'charts/neuralcura/**'
+
+jobs:
+  helm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+
+      - name: Lint chart
+        run: helm lint charts/neuralcura
+
+      - name: Package chart
+        run: helm package charts/neuralcura
+
+      - name: Upload to GitHub Pages
+        run: |
+          mkdir helm-repo
+          mv neuralcura-*.tgz helm-repo/
+          helm repo index helm-repo --url https://santhoshkumarvs.github.io/helm-repo/
+
+      - name: Push to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./helm-repo
