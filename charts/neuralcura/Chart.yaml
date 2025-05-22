@@ -1,0 +1,4 @@
+﻿apiVersion: v2
+name: neuralcura
+version: 0.1.0
+description: Helm chart for NeuralCura AI
